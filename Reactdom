@@ -1,0 +1,74 @@
+const ErrorDisplay = ({ message }) => (
+  <div style={ { color:'red', backgroundColor:'yellow' } }>
+    {message}
+  </div>
+);
+
+const CharacterCounter = () => {
+  const [count, setCount] = useState(0);
+  
+  const handleChange = (event) => {
+    const element = event.target;
+    setCount(element.value.length);
+  };
+  
+  return (
+    <div>
+      <textarea cols={80} rows={10} onChange={handleChange} />
+      <div>Count: {count}</div>
+    </div>
+  );
+};
+
+ function Button (props) {
+ return React.createElement(
+   "button",
+    { type: "submit" },
+    props.label
+  );
+}
+
+class ConditionalStyle extends React.Component {
+	render() {
+  	return (
+    	<div style={{ color: Math.random() < 0.5 ? 'green': 'red' }}>
+    	  How do you like this?
+    	</div>
+    );
+  }	
+}
+
+const RandomValue = () => (
+  <div>
+    { Math.floor(Math.random() * 100) }
+  </div>
+);
+
+const render = () => {
+  document.getElementById('mountNode').innerHTML = `
+    <div>
+      Hello HTML
+      <input />
+      <pre>${new Date().toLocaleTimeString()}</pre>
+    </div>
+  `;
+
+  ReactDOM.render(
+      React.createElement(
+      'div',
+      null,
+      'Hello React',
+      React.createElement(RandomValue),
+      React.createElement(ErrorDisplay, {message: "These aren't the droids you're looking for"}),
+      React.createElement('input', null),
+     React.createElement(Button, {label: "Save"}),
+        
+      React.createElement('pre', null, new Date().toLocaleTimeString()),
+        React.createElement(ConditionalStyle),
+        React.createElement(CharacterCounter)
+           ),
+    document.getElementById('mountNode2')
+  );
+};
+
+setInterval(render, 1000);
